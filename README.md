@@ -28,8 +28,7 @@
 
 ## Environment
 
-Kinect Azure DK driver v1.1.1
-
+- Kinect Azure DK driver v1.1.1
 - OpenCV 4.1.0
 - FreeGLUT 3.0.0
 - GLEW 2.1.0
