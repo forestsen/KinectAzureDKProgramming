@@ -59,7 +59,7 @@ Contact
 
 * Kinect Azure DK SDK
   
-https://github.com/microsoft/Azure-Kinect-Sensor-SDK
+  https://github.com/microsoft/Azure-Kinect-Sensor-SDK
 
 
 
