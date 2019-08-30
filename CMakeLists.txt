@@ -194,10 +194,10 @@ FIND_LIBRARY(ArUco_LIBRARIES DOC "Absolute path to ArUco library."
 set(GLM_DIR "D:/glm-0.9.7.1/my/install")
 set(GLM_ROOT "D:/glm-0.9.7.1/my/install")
 IF(NOT GLM_ROOT)
-    MESSAGE("ERROR: ArUco_ROOT must be set!")
+    MESSAGE("ERROR: GLM_ROOT must be set!")
 ENDIF(NOT GLM_ROOT)
 
-FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${ArUco_ROOT}/include)
+FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${GLM_ROOT}/include)
 
 add_subdirectory(OpenCV_OneKinect)
 add_subdirectory(OpenCV_TwoKinects)
