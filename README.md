@@ -25,6 +25,10 @@
 6. **OpenGL_GLFW_GLEW_PointCloudRenderer**
 
    Using GLFW + GLEW based OpenGL 3 GLSL to display raw RGB data from Kinect on the background and render the point cloud transformed from raw Depth data.
+   
+7. **Aruco_TwoKinects_Calibration_Extrinsics**
+
+   Using ArUco library to calibrate the extrinsic matrix between Two Kinects. We will get two csv files stored two transformation matrix which are **"sub => master"** and **"sub => marker"**.
 
 ## Environment
 
