@@ -42,7 +42,7 @@ foreach(lib k4a;k4arecord)
 
 endforeach()
 
-foreach(bin depthengine_1_0)
+foreach(bin depthengine_2_0)
 
   set(onebin "${bin}-NOTFOUND")
   find_file(onebin "${bin}.dll"

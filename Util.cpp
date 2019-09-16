@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #endif
 
+#include "Pixel.h"
 #include "Util.h"
 
 using namespace std;
@@ -57,5 +58,33 @@ void sen::checkGlError(const char * op)
 	{
 		std::cout << "After " << op << "() glError (0x" << error << ")" << std::endl;
 	}
+}
+#endif
+
+#ifdef CONVERT_IMAGE
+bool sen::ConvertImage(const k4a::image &srcImage, k4a::image *bgraImage)
+{
+	const int stride = srcImage.get_width_pixels() * 4 / 2;
+	const size_t expectedBufferSize = static_cast<size_t>(stride * srcImage.get_height_pixels());
+
+	if (!ImagesAreCorrectlySized(srcImage, *bgraImage, &expectedBufferSize))
+	{
+		return false;
+	}
+
+	int result = libyuv::YUY2ToARGB(srcImage.get_buffer(),      
+		stride,                                                  
+		bgraImage->get_buffer(),                                 
+		srcImage.get_width_pixels() * static_cast<int>(sizeof(Pixel)),
+		srcImage.get_width_pixels(),                                     
+		srcImage.get_height_pixels()                                     
+	);
+
+	if (result != 0)
+	{
+		return false;
+	}
+
+	return true;
 }
 #endif

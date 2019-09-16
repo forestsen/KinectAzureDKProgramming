@@ -5,12 +5,6 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH PATHS "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-  add_compile_options(/std:c++latest)
-else()
-  add_compile_options(-std=c++11)
-endif()
-
 macro(process_ext_sdk)
   message(STATUS "K4A SDK found in ext/sdk!")
   message(STATUS "!! Not searching for SDK in system path !!")
@@ -65,7 +59,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   message("Linux mode: Searching for K4A in system path and ./ext/sdk")
 
   # Test if we can find the k4a library in the system path
-  find_package(k4a 1.1.1 QUIET)
+  find_package(k4a 1.2.0 QUIET)
 
   if (${k4a_FOUND})
     message("K4A SDK found in system libraries!")
@@ -74,7 +68,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     list(APPEND K4A_LIBS k4a::k4a)
   else()
     message("K4A SDK not found in system libraries. Searching ./ext/sdk...")
-    find_package(k4a 1.1.1 PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
+    find_package(k4a 1.2.0 PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
 
     if(${k4a_FOUND})
       set(K4A_INSTALL_NEEDED true)
@@ -91,7 +85,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
   set(K4A_INSTALL_NEEDED true)
 
   # Try to find K4A installed to Program Files
-  find_package(azure-kinect-sensor-sdk 1.1.1 EXACT QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+  find_package(azure-kinect-sensor-sdk 1.2.0 EXACT QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
   if (${azure-kinect-sensor-sdk_FOUND})
     message("K4A SDK found in Program Files!")
@@ -117,7 +111,7 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     endforeach(DLL)
   else()
     # Try to find K4A installed to ./ext/sdk
-    find_package(k4a 1.1.1 QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
+    find_package(k4a 1.2.0 QUIET PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdk")
 
     if (${k4a_FOUND})
       message("K4A SDK found in ./ext/sdk!")
@@ -199,6 +193,34 @@ ENDIF(NOT GLM_ROOT)
 
 FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${GLM_ROOT}/include)
 
+# Find libjpeg-turbo.
+set(libjpeg_turbo_ROOT "D:/install/libjpeg-turbo-2.0.3")
+IF(NOT libjpeg_turbo_ROOT)
+    MESSAGE("ERROR: libjpeg_turbo_ROOT must be set!")
+ENDIF(NOT libjpeg_turbo_ROOT)
+
+set(libjpeg_turbo_INCLUDE_DIRS DOC "Path to libjpeg-turbo include directory." PATHS ${libjpeg_turbo_ROOT}/include)
+
+FIND_LIBRARY(libjpeg_turbo_LIBRARIES_jpeg DOC "Absolute path to libjpeg-turbo jpeg library."
+    NAMES jpeg-static.lib 
+    PATHS ${libjpeg_turbo_ROOT}/lib)
+
+FIND_LIBRARY(libjpeg_turbo_LIBRARIES_turbojpeg DOC "Absolute path to libjpeg-turbo turbo library."
+    NAMES turbojpeg-static.lib
+    PATHS ${libjpeg_turbo_ROOT}/lib)
+
+# Find libyuv.
+set(libyuv_ROOT "D:/install/libyuv")
+IF(NOT libyuv_ROOT)
+    MESSAGE("ERROR: libyuv_ROOT must be set!")
+ENDIF(NOT libyuv_ROOT)
+
+set(libyuv_INCLUDE_DIRS DOC "Path to libyuv include directory." PATHS ${libyuv_ROOT}/include)
+
+FIND_LIBRARY(libyuv_LIBRARIES DOC "Absolute path to libyuv library."
+    NAMES yuv.lib
+    PATHS ${libyuv_ROOT}/lib)
+
 add_subdirectory(OpenCV_OneKinect)
 add_subdirectory(OpenCV_TwoKinects)
 add_subdirectory(OpenGL_GLUT_ShowImage)
@@ -206,3 +228,6 @@ add_subdirectory(OpenGL_GLUT_ArUco_AR)
 add_subdirectory(OpenGL_GLFW_GLEW_ArUco_AR)
 add_subdirectory(OpenGL_GLFW_GLEW_PointCloudRenderer)
 add_subdirectory(Aruco_TwoKinects_Calibration_Extrinsics)
+add_subdirectory(OpenCV_TwoKinects_GreenScreen)
+add_subdirectory(OneKinect_Recording_RGB_DEPTH_IR)
+add_subdirectory(OneKinect_Playback_RGB_DEPTH_IR)

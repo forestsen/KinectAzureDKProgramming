@@ -193,10 +193,10 @@ int main(int argc, char **argv)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	videoRenderer.setup("../../TransformVertexShader.vertexshader", "../../TextureFragmentShader.fragmentshader");
+	videoRenderer.setup("../Shader/TransformVertexShader.vertexshader", "../Shader/TextureFragmentShader.fragmentshader");
 	videoRenderer.initTexture(initTexture);
 
-	cloudRenderer.setup("../../PointCloud.vertexshader", "../../PointCloud.fragmentshader", texture_width, texture_height, calibration);
+	cloudRenderer.setup("../Shader/PointCloud.vertexshader", "../Shader/PointCloud.fragmentshader", texture_width, texture_height, calibration);
 
 	capturing_thread = std::thread(frameRetriever);
 

@@ -239,10 +239,10 @@ int main(int argc, char **argv)
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	videoRenderer.setup("../../TransformVertexShader.vertexshader", "../../TextureFragmentShader.fragmentshader");
+	videoRenderer.setup("../Shader/TransformVertexShader.vertexshader", "../Shader/TextureFragmentShader.fragmentshader");
 	videoRenderer.initTexture(initTexture);
 
-	arRenderer.setup("../../TransformVertexShader_AR.vertexshader", "../../ColorFragmentShader.fragmentshader");
+	arRenderer.setup("../Shader/TransformVertexShader_AR.vertexshader", "../Shader/ColorFragmentShader.fragmentshader");
 
 	capturing_thread = std::thread(frameRetriever);
 
