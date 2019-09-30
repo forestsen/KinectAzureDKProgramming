@@ -29,10 +29,26 @@
 7. **Aruco_TwoKinects_Calibration_Extrinsics**
 
    Using ArUco library to calibrate the extrinsic matrix between Two Kinects. We will get two csv files stored two transformation matrix which are **"sub => master"** and **"sub => marker"**.
+   
+8. **OpenCV_TwoKinects_GreenScreen**
+
+   The code is copied from Azure Kinect SDK example "green screen", however, this project is based on  the OpenCV 4.1.0.
+
+9. **OneKinect_Recording_RGB_DEPTH_IR**
+
+   Record the rgb+depth+ir stream into the mkv video file.
+
+10. **OneKinect_Playback_RGB_DEPTH_IR**
+
+    Playback the mkv video file using opencv.
+
+11. **Open3D_OneKinect**
+
+    Using the Open3D to open the azure kinect device and show the rgb + depth image or the point cloud based on the open3d's visualization class.
 
 ## Environment
 
-- Kinect Azure DK driver v1.1.1
+- Kinect Azure DK driver v1.2.0
 - OpenCV 4.1.0
 - FreeGLUT 3.0.0
 - GLEW 2.1.0
@@ -41,6 +57,9 @@
 - ArUco 3.1.2
 - PCL 1.9.1
 - Eigen 3.3
+- libjpeg-turbo 2.0.3
+- libyuv
+- Open3D 0.8.0
 - Visual Studio Community 2017
 
 
