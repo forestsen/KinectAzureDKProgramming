@@ -43,9 +43,9 @@ endmacro()
 
 # Define the names of some files that we are going to try and find
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
-  set(DEPTHENGINE_DLL "depthengine_1_0.dll")
+  set(DEPTHENGINE_DLL "depthengine_2_0.dll")
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-  set(DEPTHENGINE_DLL "libdepthengine.so.1.0")
+  set(DEPTHENGINE_DLL "libdepthengine.so.2.0")
 else()
   message(FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} is not supported")
 endif()
@@ -155,9 +155,10 @@ FIND_PACKAGE(OpenCV REQUIRED)
 FIND_PACKAGE(GLUT REQUIRED)
 FIND_PACKAGE(PCL 1.9.1 REQUIRED COMPONENTS io visualization)
 FIND_PACKAGE(Eigen REQUIRED)
+FIND_PACKAGE(Open3D REQUIRED)
 
 # Find GLFW. You have set the GLFW_ROOT path with your environment.
-set(GLFW_ROOT "D:/glfw-3.3/my/install")
+set(GLFW_ROOT "D:/glfw-3.3/")
 IF(NOT GLFW_ROOT)
     MESSAGE("ERROR: GLFW_ROOT must be set!")
 ENDIF(NOT GLFW_ROOT)
@@ -173,7 +174,7 @@ FIND_LIBRARY(GLFW_LIBRARIES DOC "Absolute path to GLFW library."
 find_package(GLEW REQUIRED)
 
 # Find aruco. You have set the aruco_ROOT path with your environment.
-set(ArUco_ROOT "D:/aruco-3.1.2/my/install")
+set(ArUco_ROOT "D:/aruco-3.1.2/")
 IF(NOT ArUco_ROOT)
     MESSAGE("ERROR: ArUco_ROOT must be set!")
 ENDIF(NOT ArUco_ROOT)
@@ -185,21 +186,21 @@ FIND_LIBRARY(ArUco_LIBRARIES DOC "Absolute path to ArUco library."
     PATHS ${ArUco_ROOT}/lib)
 
 # Find GLM. You have to set the glm_room path with your environment
-set(GLM_DIR "D:/glm-0.9.7.1/my/install")
-set(GLM_ROOT "D:/glm-0.9.7.1/my/install")
+set(GLM_DIR "D:/glm-0.9.7.1/")
+set(GLM_ROOT "D:/glm-0.9.7.1/")
 IF(NOT GLM_ROOT)
     MESSAGE("ERROR: GLM_ROOT must be set!")
 ENDIF(NOT GLM_ROOT)
 
-FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${GLM_ROOT}/include)
+FIND_PATH(GLM_INCLUDE_DIRS DOC "Path to GLM include directory." NAMES glm/glm.hpp PATHS ${GLM_ROOT})
 
 # Find libjpeg-turbo.
-set(libjpeg_turbo_ROOT "D:/install/libjpeg-turbo-2.0.3")
+set(libjpeg_turbo_ROOT "D:/libjpeg-turbo-2.0.3")
 IF(NOT libjpeg_turbo_ROOT)
     MESSAGE("ERROR: libjpeg_turbo_ROOT must be set!")
 ENDIF(NOT libjpeg_turbo_ROOT)
 
-set(libjpeg_turbo_INCLUDE_DIRS DOC "Path to libjpeg-turbo include directory." PATHS ${libjpeg_turbo_ROOT}/include)
+set(libjpeg_turbo_INCLUDE_DIRS ${libjpeg_turbo_ROOT}/include)
 
 FIND_LIBRARY(libjpeg_turbo_LIBRARIES_jpeg DOC "Absolute path to libjpeg-turbo jpeg library."
     NAMES jpeg-static.lib 
@@ -210,12 +211,12 @@ FIND_LIBRARY(libjpeg_turbo_LIBRARIES_turbojpeg DOC "Absolute path to libjpeg-tur
     PATHS ${libjpeg_turbo_ROOT}/lib)
 
 # Find libyuv.
-set(libyuv_ROOT "D:/install/libyuv")
+set(libyuv_ROOT "D:/libyuv")
 IF(NOT libyuv_ROOT)
     MESSAGE("ERROR: libyuv_ROOT must be set!")
 ENDIF(NOT libyuv_ROOT)
 
-set(libyuv_INCLUDE_DIRS DOC "Path to libyuv include directory." PATHS ${libyuv_ROOT}/include)
+set(libyuv_INCLUDE_DIRS ${libyuv_ROOT}/include)
 
 FIND_LIBRARY(libyuv_LIBRARIES DOC "Absolute path to libyuv library."
     NAMES yuv.lib
@@ -231,3 +232,4 @@ add_subdirectory(Aruco_TwoKinects_Calibration_Extrinsics)
 add_subdirectory(OpenCV_TwoKinects_GreenScreen)
 add_subdirectory(OneKinect_Recording_RGB_DEPTH_IR)
 add_subdirectory(OneKinect_Playback_RGB_DEPTH_IR)
+add_subdirectory(Open3D_OneKinect)
