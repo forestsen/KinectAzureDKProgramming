@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
 			//sub
 			{
-				
+
 				colorImage_sub = capture_sub.get_color_image();
 				colorTextureBuffer_sub = colorImage_sub.get_buffer();
 				colorFrame_sub = cv::Mat(colorImage_sub.get_height_pixels(), colorImage_sub.get_width_pixels(), CV_8UC4, colorTextureBuffer_sub);
@@ -204,11 +204,11 @@ int main(int argc, char **argv)
 					}
 				}
 			}
-			
-			if(poseEstimationOK_master && poseEstimationOK_sub)
+
+			if (poseEstimationOK_master && poseEstimationOK_sub)
 			{
 				Eigen::Affine3d frame_master_sub = frame_master_marker * frame_sub_marker.inverse();
-				
+
 				cv::Vec3d rvec, tvec;
 				eigenTransform2cvRvecTvec(frame_sub_marker, rvec, tvec);
 				drawAxis(colorFrame_sub, camera_matrix_color, dist_coeffs_color, rvec, tvec, 0.5f);
@@ -220,9 +220,9 @@ int main(int argc, char **argv)
 				writeToCSVfile<double>("frame_sub_master.csv", frame_matrix);
 				std::cout << "save matrix into csv file OK.\n";
 
-				std::cout << "frame marker sub" << std::endl;
-				frame_matrix = frame_sub_marker.inverse().matrix();
-				writeToCSVfile<double>("frame_marker_sub.csv", frame_matrix);
+				std::cout << "frame sub marker" << std::endl;
+				frame_matrix = frame_sub_marker.matrix();
+				writeToCSVfile<double>("frame_sub_marker.csv", frame_matrix);
 				std::cout << "save matrix into csv file OK.\n";
 				drawAxis(colorFrame_sub, camera_matrix_color, dist_coeffs_color, rvec, tvec, 0.5f);
 			}
